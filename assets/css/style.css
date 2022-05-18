@@ -5,37 +5,129 @@
     --animator-bar-top: -400px;
     --animator-bar-color: rgba(255, 77, 90);
 }
+
 * {
     padding: 0;
     margin: 0;
 }
+
+@font-face {
+    font-family: "futura_m";
+    src: url(../font/Futura-Med.eot) format("eot"), url(../font/Futura-Med.woff) format("woff")
+}
+
+@font-face {
+    font-family: "futura_r";
+    src: url(../font/Futura-Boo.eot) format("eot"), url(../font/Futura-Boo.woff) format("woff")
+}
+
+@font-face {
+    font-family: "futura_b";
+    src: url(../font/Futura-Bol.eot) format("eot"), url(../font/Futura-Bol.woff) format("woff")
+}
+
+@font-face {
+    font-family: "futura_de";
+    src: url(../font/Futura-Dem.eot) format("eot"), url(../font/Futura-Dem.woff) format("woff")
+}
+
+html {
+    scroll-behavior: smooth;
+    background-size: cover;
+    background-image: linear-gradient(to bottom, #072142, #061c37, #07182b, #061220, #020b16);
+    font-family: "futura_m", sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+.moonlight-background {
+    background: url(../img/moonlight.svg) no-repeat;
+    background-position: fixed;
+    background-size: contain;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: -100;
+    transform: scale(2) translateX(40%);
+}
+
 .container {
-    margin: 50px 20px auto auto;
-    height: var(--height);
-    width: var(--width);
+    height: 100vh;
+    min-width: 100vw;
+    overflow-y: scroll;
+    padding-right: 20px;
+    /* overflow: hidden; */
+    scroll-snap-type: y mandatory;
+}
+
+section {
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.name {
+    font-size: 4rem;
+    color: white;
+    margin-left: 80px;
+    overflow: hidden;
+}
+
+.name > * {
+    animation: text-right-flow 1.5s ease-in-out 0s;
+    animation-fill-mode: forwards;
+    position: relative;
+    left: -120%;
+}
+
+.box {
+    /* margin: 70px 40px auto auto; */
+    min-height: 68%;
+    min-width: 50%;
+    margin-right: 80px;
+    /* padding-top: calc(56.25%/2); */
     overflow: hidden;
     background-color: var(--background-color);
-    animation: container-size 1.2s ease-in-out 2s;
+    animation: container-size 0.8s ease-in-out 0.25s;
     animation-fill-mode: forwards;
+    z-index: -1;
 }
-.inner-container {
-    height: var(--height);
-    width: 0px;
-    overflow: hidden;
-    animation: image 1.2s ease-in-out 2s;
-    animation-fill-mode: forwards;
-}
-.img {
+
+.overlay-box {
     height: 100%;
+    width: 100%;
+    margin-right: 0;
+    z-index: 1;
+    animation: overlay-box 0.8s ease-in-out 0.25s;
+    animation-fill-mode: forwards;
 }
+
+.image {
+    height: auto;
+    width: 100%;
+    /* max-height: 150%;
+    max-width: 120%; */
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .animatebar {
     height: 100%;
     width: 0;
     position: absolute;
     top: 0;
     background-color: var(--animator-bar-color);
-    animation: animatebar-width 1.2s ease-in-out 2s,
-                animatebar-pos 1.2s ease-in-out 2s;
+    animation: animatebar-width 0.8s ease-in-out 0.25s,
+        animatebar-pos 0.8s ease-in-out 0.25s;
     animation-fill-mode: forwards;
 }
 
@@ -43,12 +135,15 @@
     0% {
         width: 0;
     }
+
     40% {
         width: 120px;
     }
+
     90% {
         width: 30px;
     }
+
     100% {
         width: 0;
     }
@@ -58,24 +153,35 @@
     0% {
         left: 0;
     }
+
     100% {
-        left: var(--width);
+        left: 100%;
     }
 }
 
-@keyframes image {
+@keyframes overlay-box {
     0% {
-        width: 0;
+        width: 100%;
     }
+
     100% {
-        width: var(--width);
+        width: 0;
     }
 }
 
 @keyframes container-size {
+    from {}
+
+    to {
+        transform: scale(1.05) translateX(-5%);
+    }
+}
+
+@keyframes text-right-flow {
     from {
+        left: -120%;
     }
     to {
-        transform: scale(1.1) translateX(-10%) translateY(5%);
+        left: 0;
     }
 }
