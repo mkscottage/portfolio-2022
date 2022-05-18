@@ -1,0 +1,81 @@
+:root {
+    --height: 400px;
+    --width: 400px;
+    --background-color: rgba(7, 25, 46);
+    --animator-bar-top: -400px;
+    --animator-bar-color: rgba(255, 77, 90);
+}
+* {
+    padding: 0;
+    margin: 0;
+}
+.container {
+    margin: 50px 20px auto auto;
+    height: var(--height);
+    width: var(--width);
+    overflow: hidden;
+    background-color: var(--background-color);
+    animation: container-size 1.2s ease-in-out 2s;
+    animation-fill-mode: forwards;
+}
+.inner-container {
+    height: var(--height);
+    width: 0px;
+    overflow: hidden;
+    animation: image 1.2s ease-in-out 2s;
+    animation-fill-mode: forwards;
+}
+.img {
+    height: 100%;
+}
+.animatebar {
+    height: 100%;
+    width: 0;
+    position: absolute;
+    top: 0;
+    background-color: var(--animator-bar-color);
+    animation: animatebar-width 1.2s ease-in-out 2s,
+                animatebar-pos 1.2s ease-in-out 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes animatebar-width {
+    0% {
+        width: 0;
+    }
+    40% {
+        width: 120px;
+    }
+    90% {
+        width: 30px;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes animatebar-pos {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: var(--width);
+    }
+}
+
+@keyframes image {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: var(--width);
+    }
+}
+
+@keyframes container-size {
+    from {
+    }
+    to {
+        transform: scale(1.1) translateX(-10%) translateY(5%);
+    }
+}
